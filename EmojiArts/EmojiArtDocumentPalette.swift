@@ -2,9 +2,9 @@
 //  EmojiArtDocument+Palette.swift
 //  EmojiArt
 //
-//  Created by CS193p Instructor on 5/4/20.
-//  Copyright © 2020 Stanford University. All rights reserved.
+//  Created by Yulia Novikova on 11/5/20.
 //
+
 
 import Foundation
 
@@ -14,8 +14,6 @@ extension EmojiArtDocument
 {
     private static let PalettesKey = "EmojiArtDocument.PalettesKey"
 
-    // even though this is an instance var, it is shared across instances
-    // and is also persistent across application launches
     private(set) var paletteNames: [String:String] {
         get {
             UserDefaults.standard.object(forKey: EmojiArtDocument.PalettesKey) as? [String:String] ?? [
@@ -85,9 +83,6 @@ extension EmojiArtDocument
         }
     }
     
-    // this is a trick to make the code in the demo a little bit simpler
-    // in the real world, we'd want palettes to be Identifiable
-    // here we're simply guessing at that 😀
     private func mostLikelyIndex(of palette: String) -> Int? {
         let paletteSet = Set(palette)
         var best: (index: Int, score: Int)?

@@ -12,6 +12,7 @@ struct EmojiPicker: View {
     @ObservedObject var document: EmojiArtDocument
     
     @Binding var choosenPalette: String
+    @State var isShowingPopover = false
         
     var body: some View {
         HStack {
@@ -21,6 +22,13 @@ struct EmojiPicker: View {
                 choosenPalette = document.palette(before: choosenPalette)
             }, label: { EmptyView() })
             Text(document.paletteNames[choosenPalette] ?? "")
+            Image(systemName: "keyboard").imageScale(.large)
+                .onTapGesture { isShowingPopover = true }
+                .popover(isPresented: $isShowingPopover) {
+                    PaletteEditor(chosenPalette: $choosenPalette)
+                        .environmentObject(document)
+                        .frame(minWidth: 300, minHeight: 500)
+                }
         }
         .fixedSize(horizontal: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/, vertical: false)
         .onAppear { choosenPalette = document.defaultPalette }
