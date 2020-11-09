@@ -12,6 +12,8 @@ struct EmojiArt: Codable {
     var backgroundURL: URL?
     var emojis = [Emoji]()
     
+    
+    
     struct Emoji: Identifiable, Codable {
         let id: Int
 
