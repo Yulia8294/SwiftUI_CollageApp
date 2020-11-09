@@ -25,7 +25,7 @@ struct EmojiPicker: View {
             Image(systemName: "keyboard").imageScale(.large)
                 .onTapGesture { isShowingPopover = true }
                 .popover(isPresented: $isShowingPopover) {
-                    PaletteEditor(chosenPalette: $choosenPalette)
+                    PaletteEditor(chosenPalette: $choosenPalette, isShowing: $isShowingPopover)
                         .environmentObject(document)
                         .frame(minWidth: 300, minHeight: 500)
                 }
